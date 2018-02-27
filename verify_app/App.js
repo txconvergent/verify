@@ -2,6 +2,8 @@ import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, StatusBar, Platform, ImageBackground } from 'react-native';
 import { Camera, Permissions } from 'expo';
 import { Ionicons, FontAwesome } from '@expo/vector-icons';
+import Swiper from 'react-native-swiper';
+import Header from './components/Header';
 
 const MyStatusBar = ({backgroundColor, ...props}) => (
   <View style={[styles.statusBar, { backgroundColor }]}>
@@ -43,6 +45,7 @@ function FlashIcon(props) {
   }
 }
 
+
 export default class verify extends React.Component {
   state = {
     hasCameraPermission: null,
@@ -57,6 +60,7 @@ export default class verify extends React.Component {
   }
 
   render() {
+
     const { hasCameraPermission } = this.state;
 
     if (this.state.photo == null) {
@@ -66,59 +70,64 @@ export default class verify extends React.Component {
         return <Text>No access to camera</Text>;
       } else {
         return(
-          <View style={styles.container}>
-            <View style={{ flex: 1 }}>
-              <Camera style={{ flex: 1 }} type={this.state.type} ref={ref => { this.camera = ref; }}>
-                <MyStatusBar translucent={true} backgroundColor="rgba(0, 0, 0, 0.0)" barStyle="light-content" />
-                <View
-                  style={{
-                    flex: 1,
-                    backgroundColor: 'transparent',
-                    flexDirection: 'row',
-                    justifyContent: 'flex-end',
-                  }}>
-                  <FlashIcon flash={this.state.flash} app={this} />
-                  <TouchableOpacity
+          <Swiper loop={false} showsPagination={false}>
+            <View style={styles.container}>
+              <View style={{ flex: 1 }}>
+                <Camera style={{ flex: 1 }} type={this.state.type} ref={ref => { this.camera = ref; }}>
+                  <MyStatusBar translucent={true} backgroundColor="rgba(0, 0, 0, 0.0)" barStyle="light-content" />
+                  <View
                     style={{
-                      flex: 0.1,
-                      alignSelf: 'flex-start',
-                      alignItems: 'center',
-                    }}
-                    onPress={() => {
-                      this.setState({
-                        type: this.state.type === Camera.Constants.Type.back ? Camera.Constants.Type.front : Camera.Constants.Type.back,
-                      });
+                      flex: 1,
+                      backgroundColor: 'transparent',
+                      flexDirection: 'row',
+                      justifyContent: 'flex-end',
                     }}>
-                    <Ionicons name="ios-reverse-camera-outline" size={32} color="white"/>
-                  </TouchableOpacity>
-                </View>
-                <View
-                  style={{
-                    flex: 1,
-                    backgroundColor: 'transparent',
-                    flexDirection: 'row',
-                    justifyContent: 'center',
-                  }}>
-                  <TouchableOpacity
-                    style={{
-                      flex: 0.2,
-                      alignSelf: 'flex-end',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                    }}
-                    onPress={ async () => {
-                        if (this.camera) {
-                          this.setState({
-                            photo: await this.camera.takePictureAsync(),
-                          });
-                        }
+                    <FlashIcon flash={this.state.flash} app={this} />
+                    <TouchableOpacity
+                      style={{
+                        flex: 0.1,
+                        alignSelf: 'flex-start',
+                        alignItems: 'center',
+                      }}
+                      onPress={() => {
+                        this.setState({
+                          type: this.state.type === Camera.Constants.Type.back ? Camera.Constants.Type.front : Camera.Constants.Type.back,
+                        });
                       }}>
-                    <FontAwesome name="circle-thin" size={85} color="white"/>
-                  </TouchableOpacity>
-                </View>
-              </Camera>
+                      <Ionicons name="ios-reverse-camera-outline" size={32} color="white"/>
+                    </TouchableOpacity>
+                  </View>
+                  <View
+                    style={{
+                      flex: 1,
+                      backgroundColor: 'transparent',
+                      flexDirection: 'row',
+                      justifyContent: 'center',
+                    }}>
+                    <TouchableOpacity
+                      style={{
+                        flex: 0.2,
+                        alignSelf: 'flex-end',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                      }}
+                      onPress={ async () => {
+                          if (this.camera) {
+                            this.setState({
+                              photo: await this.camera.takePictureAsync(),
+                            });
+                          }
+                        }}>
+                      <FontAwesome name="circle-thin" size={85} color="white"/>
+                    </TouchableOpacity>
+                  </View>
+                </Camera>
+              </View>
             </View>
-          </View>
+            <View style={{ flex: 1 }}>
+              <Header headerText={'Photos'} />
+            </View>
+          </Swiper>
         );
       }
     } else {
@@ -145,6 +154,8 @@ export default class verify extends React.Component {
     }
   }
 }
+
+
 
 const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : StatusBar.currentHeight;
 const APPBAR_HEIGHT = Platform.OS === 'ios' ? 44 : 56;
