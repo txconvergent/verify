@@ -15,7 +15,8 @@ export default class verify extends React.Component {
 		hasCameraPermission: null,
 		type: Camera.Constants.Type.back,
 		flash: Camera.Constants.FlashMode.off,
-		photo: null
+		photo: null,
+		photoId: 0
 	};
 
 	async componentWillMount() {
@@ -41,6 +42,7 @@ export default class verify extends React.Component {
 					</View>
 					<View style={styles.container}>
 						<Header headerText={'Photos'}/>
+						<Text>{this.state.photoId}</Text>
 					</View>
 				</Swiper>);
 			}
