@@ -4,6 +4,8 @@ import { Camera } from 'expo';
 
 import StatusBarPadder from './../Header/StatusBarPadder';
 import CloseButton from './Buttons/CloseButton';
+import SendButton from './Buttons/SendButton';
+
 
 const StillPictureView = (props) => {
 	const app = props.app;
@@ -16,6 +18,7 @@ const StillPictureView = (props) => {
 
 			<StatusBarPadder translucent={true} backgroundColor="rgba(0, 0, 0, 0.0)" barStyle="light-content"/>
 			<CloseButton app={app} />
+			<SendButton app={app} />
 		</ImageBackground>
 	);
 }

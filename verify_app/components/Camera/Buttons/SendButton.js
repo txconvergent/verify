@@ -2,24 +2,22 @@ import React from 'react';
 import { TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
-const CloseButton = (props) => {
+const SendButton = (props) => {
 	const app = props.app;
 
 	return(
 		<TouchableOpacity
 			style={{
-				flex: 0.1,
+				flex: 1,
+				justifyContent: 'flex-end',
 				alignSelf: 'flex-end',
-				alignItems: 'center',
-				marginRight: 10
-			}}
-			onPress={() => {
-				app.setState({photo: null});
+        marginRight: 10,
+        marginBottom: 10
 			}}>
 
-			<Ionicons name="md-close" size={32} color="white"/>
+			<Ionicons name="ios-arrow-forward" size={70} color="white"/>
 		</TouchableOpacity>
 	);
 }
 
-export default CloseButton;
+export default SendButton;
