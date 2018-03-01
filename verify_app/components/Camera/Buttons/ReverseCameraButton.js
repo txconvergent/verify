@@ -19,7 +19,7 @@ const ReverseCameraButton = (props) => {
 						: Camera.Constants.Type.back
 				});
 			}}>
-			<Ionicons name="ios-reverse-camera-outline" size={32} color="white"/>
+			<Ionicons name="ios-reverse-camera-outline" size={34} color="white"/>
 		</TouchableOpacity>
 	);
 }

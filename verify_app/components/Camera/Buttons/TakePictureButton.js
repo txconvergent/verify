@@ -9,16 +9,17 @@ const TakePictureButton = (props) => {
 
 	return(
 	<TouchableOpacity style={{
-			flex: 0.2,
+			flex: 0.3,
 			alignSelf: 'flex-end',
 			alignItems: 'center',
-			justifyContent: 'center'
+			justifyContent: 'center',
+			paddingBottom: 10,
 		}} onPress={async () => {
 			if (app.camera) {
 				app.setState({photo: await app.camera.takePictureAsync()});
 			}
 		}}>
-		<FontAwesome name="circle-thin" size={85} color="white"/>
+		<FontAwesome name="circle-thin" size={90} color="white"/>
 	</TouchableOpacity>
 	);
 };

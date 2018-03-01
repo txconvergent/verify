@@ -7,6 +7,7 @@ import StatusBarPadder from './../Header/StatusBarPadder';
 import TakePictureButton from './Buttons/TakePictureButton';
 import FlashButton from './Buttons/FlashButton';
 import ReverseCameraButton from './Buttons/ReverseCameraButton';
+import PhotosButton from './Buttons/PhotosButton';
 
 const LiveCameraView = (props) => {
 	const app = props.app;
@@ -23,7 +24,8 @@ const LiveCameraView = (props) => {
 					flex: 1,
 					backgroundColor: 'transparent',
 					flexDirection: 'row',
-					justifyContent: 'flex-end'
+					justifyContent: 'flex-end',
+					paddingRight: 5,
 				}}>
 				<FlashButton flash={app.state.flash} app={app}/>
 				<ReverseCameraButton app={app} />
@@ -32,9 +34,11 @@ const LiveCameraView = (props) => {
 					flex: 1,
 					backgroundColor: 'transparent',
 					flexDirection: 'row',
-					justifyContent: 'center'
+					justifyContent: 'space-between'
 				}}>
+				<View style={{ flex: 0.1 }} />
 				<TakePictureButton app={app} />
+				<PhotosButton app={app} />
 			</View>
 		</Camera>
 	);

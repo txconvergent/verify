@@ -11,13 +11,14 @@ const CloseButton = (props) => {
 				flex: 0.1,
 				alignSelf: 'flex-end',
 				alignItems: 'center',
-				marginRight: 10
+				marginRight: 10,
+				paddingRight: 5,
 			}}
 			onPress={() => {
 				app.setState({photo: null});
 			}}>
 
-			<Ionicons name="md-close" size={32} color="white"/>
+			<Ionicons name="md-close" size={34} color="white"/>
 		</TouchableOpacity>
 	);
 }

@@ -19,7 +19,7 @@ const FlashButton = (props) => {
 						: Camera.Constants.FlashMode.on
 				});
 			}}>
-			<Ionicons name="ios-flash-outline" size={32} color="white"/>
+			<Ionicons name="ios-flash-outline" size={35} color="white"/>
 		</TouchableOpacity>);
 	} else {
 		return (<TouchableOpacity style={{

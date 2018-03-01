@@ -35,11 +35,11 @@ export default class verify extends React.Component {
 				return <Text>No access to camera</Text>;
 			} else {
 				return (
-				<Swiper loop={false} showsPagination={false}>
+				<Swiper ref="swiper" loop={false} showsPagination={false}>
 					<View style={styles.container}>
 						<LiveCameraView app={this} />
 					</View>
-					<View style={{ flex: 1 }}>
+					<View style={styles.container}>
 						<Header headerText={'Photos'}/>
 					</View>
 				</Swiper>);
