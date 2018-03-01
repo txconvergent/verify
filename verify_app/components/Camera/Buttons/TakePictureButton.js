@@ -16,7 +16,9 @@ const TakePictureButton = (props) => {
 			paddingBottom: 10,
 		}} onPress={async () => {
 			if (app.camera) {
-				app.setState({photo: await app.camera.takePictureAsync()});
+				app.camera.takePictureAsync().then( data => {
+					app.setState({photo: data});
+				});
 			}
 		}}>
 		<FontAwesome name="circle-thin" size={90} color="white"/>
