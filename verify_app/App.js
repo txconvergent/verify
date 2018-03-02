@@ -42,7 +42,6 @@ export default class verify extends React.Component {
 					</View>
 					<View style={styles.container}>
 						<Header headerText={'Photos'}/>
-						<Text>{this.state.photoId}</Text>
 					</View>
 				</Swiper>);
 			}

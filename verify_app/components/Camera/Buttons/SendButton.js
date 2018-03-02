@@ -18,10 +18,9 @@ const SendButton = (props) => {
 			onPress = {async () => {
 				FileSystem.moveAsync({
 					from: app.state.photo.uri,
-					to: `${FileSystem.documentDirectory}/Photo_${app.state.photoId}.jpg`
+					to: `${FileSystem.documentDirectory}/Photo_${(new Date()).getTime()}.jpg`
 				}).then(() => {
 					app.setState({
-						photoId: app.state.photoId + 1,
 						photo: null
 					});
 				});
