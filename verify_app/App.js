@@ -1,14 +1,14 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import {Camera, Permissions} from 'expo';
+import {Camera, Permissions, FileSystem} from 'expo';
 import {Ionicons, FontAwesome} from '@expo/vector-icons';
 
 import Swiper from 'react-native-swiper';
 import Header from './components/Header/Header';
+import PhotoList from './components/PhotoList';
 
 import LiveCameraView from './components/Camera/LiveCameraView';
 import StillPictureView from './components/Camera/StillPictureView';
-
 
 export default class verify extends React.Component {
 	state = {
@@ -16,7 +16,7 @@ export default class verify extends React.Component {
 		type: Camera.Constants.Type.back,
 		flash: Camera.Constants.FlashMode.off,
 		photo: null,
-		photoId: 0
+		photos: []
 	};
 
 	async componentWillMount() {
@@ -24,8 +24,17 @@ export default class verify extends React.Component {
 		this.setState({
 			hasCameraPermission: status === 'granted'
 		});
+
+		FileSystem.readDirectoryAsync(FileSystem.documentDirectory+'photos/').then(
+      resp => { this.setState({photos: resp}) });
 	}
 
+	async componentDidMount(dir=FileSystem.documentDirectory + 'photos/') {
+		const info = await FileSystem.getInfoAsync(dir);
+    if( !(info.exist || info.isDirectory)){
+       await FileSystem.makeDirectoryAsync(dir);
+    }
+	}
 	render() {
 		const {hasCameraPermission} = this.state;
 
@@ -42,7 +51,7 @@ export default class verify extends React.Component {
 					</View>
 					<View style={styles.container}>
 						<Header headerText={'Photos'}/>
-						<Text>{this.state.photoId}</Text>
+						<PhotoList app={this} />
 					</View>
 				</Swiper>);
 			}

@@ -16,15 +16,20 @@ const SendButton = (props) => {
 		        marginBottom: 10
 			}}
 			onPress = {async () => {
-				FileSystem.moveAsync({
-					from: app.state.photo.uri,
-					to: `${FileSystem.documentDirectory}/Photo_${app.state.photoId}.jpg`
-				}).then(() => {
-					app.setState({
-						photoId: app.state.photoId + 1,
-						photo: null
+				try {
+					FileSystem.moveAsync({
+						from: app.state.photo.uri,
+						to: `${FileSystem.documentDirectory}photos/${(new Date()).getTime()}.jpg`
+					}).then(() => {
+						app.setState({
+							photo: null,
+						});
+						FileSystem.readDirectoryAsync(FileSystem.documentDirectory+'photos/').then(
+				      resp => { app.setState({photos: resp}) });
 					});
-				});
+				} catch (error) {
+					console.error("Failed saving to device");
+				}
 			}}>
 
 			<Ionicons name="ios-arrow-forward" size={60} color="white"/>
