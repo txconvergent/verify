@@ -15,7 +15,7 @@ const CloseButton = (props) => {
 				paddingRight: 5,
 			}}
 			onPress={() => {
-				app.setState({photo: null});
+				app.setState({photo: null, photoSaved: null});
 			}}>
 
 			<Ionicons name="md-close" size={34} color="white"/>

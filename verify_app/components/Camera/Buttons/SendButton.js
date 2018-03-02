@@ -9,11 +9,11 @@ const SendButton = (props) => {
 	return(
 		<TouchableOpacity
 			style={{
-				flex: 1,
+				flex: 0.1,
 				justifyContent: 'flex-end',
 				alignSelf: 'flex-end',
-        marginRight: 10,
-        marginBottom: 10
+		        marginRight: 10,
+		        marginBottom: 10
 			}}
 			onPress = {async () => {
 				FileSystem.moveAsync({
@@ -27,7 +27,7 @@ const SendButton = (props) => {
 				});
 			}}>
 
-			<Ionicons name="ios-arrow-forward" size={70} color="white"/>
+			<Ionicons name="ios-arrow-forward" size={60} color="white"/>
 		</TouchableOpacity>
 	);
 }
