@@ -51,7 +51,10 @@ export default class verify extends React.Component {
 					</View>
 					<View style={styles.container}>
 						<Header headerText={'Photos'}/>
+<<<<<<< HEAD
 						<PhotoList app={this} />
+=======
+>>>>>>> origin/master
 					</View>
 				</Swiper>);
 			}
