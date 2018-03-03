@@ -5,6 +5,7 @@ import {Ionicons, FontAwesome} from '@expo/vector-icons';
 
 import Swiper from 'react-native-swiper';
 import Header from './components/Header/Header';
+import StatusBarPadder from './components/Header/StatusBarPadder';
 import PhotoList from './components/PhotoList';
 
 import LiveCameraView from './components/Camera/LiveCameraView';
@@ -50,11 +51,9 @@ export default class verify extends React.Component {
 						<LiveCameraView app={this} />
 					</View>
 					<View style={styles.container}>
+						<StatusBarPadder translucent={true} backgroundColor="rgba(0, 0, 0, 0.0)" barStyle="light-content"/>
 						<Header headerText={'Photos'}/>
-<<<<<<< HEAD
 						<PhotoList app={this} />
-=======
->>>>>>> origin/master
 					</View>
 				</Swiper>);
 			}
