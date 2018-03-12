@@ -12,17 +12,18 @@ const PhotoList = (props) => {
 	    {
 	      app.state.photos.map(photo => {
 	        return (
-							<TouchableHighlight
-								key={photo}
-								underlayColor='transparent'
-	            >
-	              <Image
-	                style={{
-	                  width: width/3,
-	                  height: width/3
-	                }}
-	                source={{uri: Expo.FileSystem.documentDirectory+'photos/'+photo}}
-	              />
+				<TouchableHighlight
+					key={photo}
+					underlayColor='transparent'>
+		            <Image
+						style={{
+							width: width/3 - 3,
+							height: width/3 - 3,
+							marginTop: 2,
+							marginLeft: 2,
+		                }}
+		                source={{uri: Expo.FileSystem.documentDirectory+'photos/'+photo}}
+		            />
 	            </TouchableHighlight>
 	        )
 	      })

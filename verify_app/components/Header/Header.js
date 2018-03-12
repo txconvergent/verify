@@ -14,19 +14,21 @@ const Header = (props) => {
 
 const styles = {
   viewStyle: {
-    backgroundColor: '#F8F8F8',
+    backgroundColor: '#39d052',
     justifyContent: 'center', //vertical position of items in Flex Box
     alignItems: 'center', //horizontal position
-    height: 60, //dimensions of Flex Box
-    paddingTop: 15,
-    shadowColor: '#000', //border color
+    height: 50, //dimensions of Flex Box
+    paddingTop: 5,
+    paddingBottom: 10,
+    shadowColor: 'rgba(0, 0, 0, 0.0)', //border color
     shadowOffset: {width: 0, height: 2}, //border position offset and thickness
     shadowOpacity: 0.2,
     elevation: 2,
     position: 'relative'
   },
   textStyle: {
-    fontSize: 20 //like CSS but with camelCase
+    fontSize: 20, //like CSS but with camelCase
+    color: '#FFFFFF'
   }
 };
 

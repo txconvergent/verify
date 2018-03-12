@@ -51,7 +51,7 @@ export default class verify extends React.Component {
 						<LiveCameraView app={this} />
 					</View>
 					<View style={styles.container}>
-						<StatusBarPadder translucent={true} backgroundColor="rgba(0, 0, 0, 0.0)" barStyle="light-content"/>
+						<StatusBarPadder translucent={true} backgroundColor="rgba(57, 208, 82, 1.0)" barStyle="light-content"/>
 						<Header headerText={'Photos'}/>
 						<PhotoList app={this} />
 					</View>
