@@ -1,5 +1,5 @@
 import React from 'react'; //need whole React library for JSX code
-import { View, Image, TextInput, Text, Dimensions } from 'react-native';
+import { View, Image, TextInput, Text, Dimensions, AsyncStorage } from 'react-native';
 
 import logo from '../../images/full_logo.png';
 
@@ -7,8 +7,8 @@ const { width } = Dimensions.get('window');
 
 class LoginScreen extends React.Component {
 	state = {
-		usernameText: "username",
-		passwordText: "password",
+		usernameText: "",
+		passwordText: "",
 	};
 
 	render() {
@@ -35,8 +35,7 @@ class LoginScreen extends React.Component {
 							borderBottomWidth: 1,
 							color: 'white',
 						}}
-	        			onChangeText={(text) => this.setState({text})}
-	        			value={this.state.text}
+	        			onChangeText={(text) => this.setState({usernameText: text})}
 						onClick={this.focus}
 	      			/>
 					<Text style={{color:'white'}}>username</Text>
@@ -50,6 +49,9 @@ class LoginScreen extends React.Component {
 							borderBottomWidth: 1,
 							color: 'white',
 						}}
+						onChangeText={(text) => this.setState({passwordText: text})}
+						secureTextEntry={true}
+						onClick={this.focus}
 					/>
 					<Text style={{color:'white'}}>password</Text>
 				</View>
@@ -62,7 +64,10 @@ class LoginScreen extends React.Component {
 				}}>
 					<Text
 						style={{color:'white'}}
-						onPress={() => this.props.navigation.navigate('Home')}
+						onPress={() => {
+							this.props.navigation.navigate('Home');
+							AsyncStorage.setItem('skipped', 'true');
+						}}
 					>
 						skip
 					</Text>
