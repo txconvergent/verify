@@ -2,6 +2,7 @@ import React from 'react';
 import { TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { FileSystem } from 'expo';
+import crypto from 'isomorphic-webcrypto'
 
 const SendButton = (props) => {
 	const app = props.app;
@@ -21,6 +22,7 @@ const SendButton = (props) => {
 						from: app.state.photo.uri,
 						to: `${FileSystem.documentDirectory}photos/${(new Date()).getTime()}.jpg`
 					}).then(() => {
+						_hashPic(app.state.photo.base64)
 						app.setState({
 							photo: null,
 						});
@@ -35,6 +37,22 @@ const SendButton = (props) => {
 			<Ionicons name="ios-arrow-forward" size={60} color="white"/>
 		</TouchableOpacity>
 	);
+}
+
+function _hashPic(pic){
+	crypto.subtle.digest(
+    {
+        name: "SHA-256",
+    },
+    new Uint8Array(pic) //The data you want to hash as an ArrayBuffer
+	)
+	.then(function(hash){
+	    //returns the hash as an ArrayBuffer
+	    console.log(new Uint8Array(hash));
+	})
+	.catch(function(err){
+	    console.error(err);
+	});
 }
 
 export default SendButton;

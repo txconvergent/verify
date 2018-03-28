@@ -16,7 +16,7 @@ const TakePictureButton = (props) => {
 			paddingBottom: 10,
 		}} onPress={async () => {
 			if (app.camera) {
-				app.camera.takePictureAsync().then( data => {
+				app.camera.takePictureAsync({base64: true}).then( data => {
 					app.setState({photo: data});
 				});
 			}
