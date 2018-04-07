@@ -17,11 +17,11 @@ class block:
     def calculate_Hashcode(self):
         sha = hashlib.sha1()
         sha.update(
-            str.encode(self.index) +
-            str.encode(self.timestamp) +
-            str.encode(self.data) +
-            str.encode(self.previousHash) +
-            str.encode(str(self.nonce))
+            str(self.index).encode() +
+            str(self.timestamp).encode() +
+            str(self.data).encode() +
+            str(self.previousHash).encode() +
+            str(self.nonce).encode()
         )
         return sha.hexdigest()
 
@@ -60,18 +60,18 @@ class blockchain(block):
 
     def print_blockchain(self):
         print("Start Blockchain:")
-        print("Block Number:", self.chain[0].index, "data stored:", self.chain[0].data)
+        print("Block Number:", self.chain[0](index), "data stored:", self.chain[0].data)
         print("Previous Hash:", self.chain[0].previousHash)
         print("Current Hash:", self.chain[0].calculate_Hash())
         for i in range(1, len(self.chain)):
-            print ("Block Number:", self.chain[i].index, "data stored: ", self.chain[i].data)
+            print ("Block Number:", self.chain[i], "data stored: ", self.chain[i].data)
             print ("Previous Hash:", self.chain[i].previousHash)
             print ("Current Hash:", self.chain[i].make_block(self.level))
 
     def chain_validity(self):
         for i in range(1, len(self.chain)):
             if self.chain[i].hash != self.chain[i].check_if_exists(self.level):
-                print ("Current Hash,", self.cahin[i].hash, "Do not match with a previously mined Hash", self.chain[i].check_if_exists(self.level))
+                print ("Current Hash,", self.chain[i].hash, "Do not match with a previously mined Hash", self.chain[i].check_if_exists(self.level))
                 return False
             elif self.chain[i-1].hash != self.chain[i].previousHash:
                 print ("Previous Hash", self.chain[i-1].hash, "Does not match with the Previous Hash", self.chain[i].previousHash)
@@ -92,7 +92,7 @@ photo_data.add_block(block("4", "03/04/2018", 20, "0"))
 print("Mining block 5")
 photo_data.add_block(block("5", "03/04/2018", 10, "0"))
 print("_______________________________")
-photo_data.print_chain()
+print(photo_data.print_blockchain())
 print("_______________________________")
 print(photo_data.chain_validity())
 print("_______________________________")
