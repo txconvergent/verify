@@ -2,8 +2,7 @@ class Blockchain {
   constructor () {
     // Create chain and transaction
     this.chain = []
-    this.current_transactions = []
-
+    
     // Binding of this
     this.newBLock = this.newBLock.bind(this)
     this.newTransaction = this.newTransaction.bind(this)
@@ -19,27 +18,9 @@ class Blockchain {
     proof: proof,
     previous_hash: previousHash
   }
-  this.current_transactions = [] // In the future deque, so don't need to reset
+  // In the future deque, so don't need to reset
   this.chain.push(block)
   return block
-  }
-
-  newTransaction (sender, recipient, amount) {
-    this.current_transactions.push({
-      sender: sender,
-      recipient: recipient, 
-      amount: amount
-    })
-    return this.lastBlock()['index'] + 1 // Square notation
-  }
-
-  hash (block) {
-    const blockString = JSON.stringify(block)
-    const hash = crypto.createHmac(process.env.HASH_TYPE, process.env.CRYPTO_SECRET)
-    .update(blockString) // Calling on previous line object
-    .digest('hex')       // Calling on previous line object
-    
-    return hash
   }
 
   lastBlock () {
