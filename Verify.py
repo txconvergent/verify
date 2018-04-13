@@ -4,42 +4,50 @@ the blockchain.'''
 import hashlib
 import datetime as date
 
-class block:
-    def __init__(self, index, timestamp, data, previousHash):
-        self.index = index
-        self.timestamp = timestamp
-        self.data = data
-        self.previousHash = previousHash
-        # nonce is an arbitrary number only used once
-        self.nonce = 0
-        self.hash = self.calculate_Hashcode()
+##############################################################
+#vvvvv The block class is seperated to verify_block.py vvvvvv#
+##############################################################
 
-    def calculate_Hashcode(self):
-        sha = hashlib.sha1()
-        sha.update(
-            str(self.index).encode() +
-            str(self.timestamp).encode() +
-            str(self.data).encode() +
-            str(self.previousHash).encode() +
-            str(self.nonce).encode()
-        )
-        return sha.hexdigest()
+# class block:
+#     def __init__(self, index, timestamp, data, previousHash):
+#         self.index = index
+#         self.timestamp = timestamp
+#         self.data = data
+#         self.previousHash = previousHash
+#         # nonce is an arbitrary number only used once
+#         self.nonce = 0
+#         self.hash = self.calculate_Hashcode()
 
-    def make_block(self, level):
-            while(self.hash[:level] != "0"*level):
-                self.hash = self.calculate_Hashcode()
-                self.nonce += 1
-            print ("Made Block: ", self.hash)
-            return self.hash;
+#     def calculate_Hashcode(self):
+#         sha = hashlib.sha1()
+#         sha.update(
+#             str(self.index).encode() +
+#             str(self.timestamp).encode() +
+#             str(self.data).encode() +
+#             str(self.previousHash).encode() +
+#             str(self.nonce).encode()
+#         )
+#         return sha.hexdigest()
 
-    def check_if_exists(self, level):
-        new_hash = " "
-        self.nonce = 0
-        while(new_hash[:difficulty] != "0"*level):
-            new_hash = self.calculate_Hashcode()
-            self.nonce += 1
-        return new_hash
+#     def make_block(self, level):
+#             while(self.hash[:level] != "0"*level):
+#                 self.hash = self.calculate_Hashcode()
+#                 self.nonce += 1
+#             print ("Made Block: ", self.hash)
+#             return self.hash;
 
+#     def check_if_exists(self, level):
+#         new_hash = " "
+#         self.nonce = 0
+#         while(new_hash[:difficulty] != "0"*level):
+#             new_hash = self.calculate_Hashcode()
+#             self.nonce += 1
+#         return new_hash
+##############################################################
+#^^^^^ The block class is seperated to verify_block.py ^^^^^^#
+##############################################################
+
+# We most likely need to change the blockchain code to js
 class blockchain(block):
 
     def __init__(self):
@@ -79,26 +87,26 @@ class blockchain(block):
             return True
 
 
-photo_data = blockchain()
+# photo_data = blockchain()
 
-print("Mining block 1")
-photo_data.add_block(block("1", "03/04/2018", 50, "0"))
-print("Mining block 2")
-photo_data.add_block(block("2", "03/04/2018", 40, "0"))
-print("Mining block 3")
-photo_data.add_block(block("3", "03/04/2018", 30, "0"))
-print("Mining block 4")
-photo_data.add_block(block("4", "03/04/2018", 20, "0"))
-print("Mining block 5")
-photo_data.add_block(block("5", "03/04/2018", 10, "0"))
-print("_______________________________")
-print(photo_data.print_blockchain())
-print("_______________________________")
-print(photo_data.chain_validity())
-print("_______________________________")
-photo_data.chain[2].data = 100
-photo_data.print_chain()
-print(photo_data.chain_validity())
-print("_______________________________")
+# print("Mining block 1")
+# photo_data.add_block(block("1", "03/04/2018", 50, "0"))
+# print("Mining block 2")
+# photo_data.add_block(block("2", "03/04/2018", 40, "0"))
+# print("Mining block 3")
+# photo_data.add_block(block("3", "03/04/2018", 30, "0"))
+# print("Mining block 4")
+# photo_data.add_block(block("4", "03/04/2018", 20, "0"))
+# print("Mining block 5")
+# photo_data.add_block(block("5", "03/04/2018", 10, "0"))
+# print("_______________________________")
+# print(photo_data.print_blockchain())
+# print("_______________________________")
+# print(photo_data.chain_validity())
+# print("_______________________________")
+# photo_data.chain[2].data = 100
+# photo_data.print_chain()
+# print(photo_data.chain_validity())
+# print("_______________________________")
 
 
