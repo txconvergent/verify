@@ -21,7 +21,10 @@ app.post('/postBlock', (req, res) => {
 
 
 
-
+app.get('/getHashCode', (req, res) => {
+  // res.send specific blockchain block
+  // blockchain[i]
+});
 
 
 
