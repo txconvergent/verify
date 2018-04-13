@@ -9,11 +9,16 @@
 */
 
 // Libraries
-const path    = require('path')
-const express = require('express')
+const path = require('path');
+const express = require('express');
+var bodyParser = require("body-parser");
 
+var app = express();
+var port = 3000;
 
-const app = express()
+app.use(bodyParser.json());  // Tell system to use JSON
+app.use(bodyParser.urlencoded( {extended: true} ));
+
 app.get('/', (req, res) => res.sendFile('introPage.txt', {root: __dirname}))
 app.get('/last_block', (req, res) => res.send("This is the last block."))
 app.get('/file', (req, res) => res.sendFile('structure.js', {root: path.join(__dirname)}))
@@ -22,7 +27,7 @@ app.listen(3000, () => console.log("Example app listening on port 3000!\nConnect
 
 
 
-// https://medium.com/@HolmesLaurence/integrating-node-and-python-6b8454bfc272
+// Create a block with python script
 app.get('/blockchain', callPythonScript);
 
 function callPythonScript(req, res) {
