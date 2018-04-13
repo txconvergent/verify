@@ -3,6 +3,7 @@
 the blockchain.'''
 import hashlib
 import datetime as date
+import sys  # For node child process
 
 ##############################################################
 #vvvvv The block class is seperated to verify_block.py vvvvvv#

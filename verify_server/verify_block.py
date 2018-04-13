@@ -3,6 +3,7 @@
 the blockchain.'''
 import hashlib
 import datetime as date
+import sys  # For node child process
 
 class block:
     def __init__(self, index, timestamp, data, previousHash):
