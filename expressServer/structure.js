@@ -1,4 +1,4 @@
-import { userInfo } from 'os';
+// import { userInfo } from 'os';
 
 /*
 - /last_block --> returns the last block
@@ -51,7 +51,6 @@ mongoose.connection.on('open', function () {
     image.img.contentType = 'image/png';
     image.save(function (err, image) {
       if (err) throw err;
-
       console.error('saved img to mongo');
 
 // // CRUD endpoints
@@ -105,4 +104,4 @@ function callPythonScript(req, res) {
   process.stdout.on('data', function(data) {
     res.send(data.toString());
   });
-}
+};
