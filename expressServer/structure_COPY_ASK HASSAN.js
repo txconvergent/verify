@@ -41,18 +41,26 @@ var Image = mongoose.model("Image", imageSchema);
 app.get('/', (req, res) => res.sendFile('index.html', {root: __dirname}))
 
 
-/// HARD CODE ///
+/// HARD CODE DEBUG ///
 var newImage = new Image({
   hashCode: '{type: String}',
   imageFileBinary: 'lkjdf'
 });
+/// HARD CODE DEBUG ///
+// newImage.save(function(error) {
+//   console.log("SAVED!");
+//   if (error) {
+//     console.error(error);
+//   }
+// });
 
-newImage.save(function(error) {
-  console.log("SAVED!");
-  if (error) {
+newImage.save()
+  .then(function(product){
+    console.log("Saved!");
+  })
+  .catch(err => {
     console.error(error);
-  }
-});
+  });
 
 
 
