@@ -59,7 +59,7 @@ newImage.save()
     console.log("Saved!");
   })
   .catch(err => {
-    console.error(error);
+    console.error(err);
   });
 
 
