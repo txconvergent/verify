@@ -2,7 +2,11 @@ import React from 'react';
 import { TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { FileSystem } from 'expo';
-import crypto from 'isomorphic-webcrypto'
+
+import crypto from 'isomorphic-webcrypto';
+import hex from 'hex-lite';
+
+var TextEncoder = require('text-encoding').TextEncoder;
 
 const SendButton = (props) => {
 	const app = props.app;
@@ -41,14 +45,11 @@ const SendButton = (props) => {
 
 function _hashPic(pic){
 	crypto.subtle.digest(
-    {
-        name: "SHA-256",
-    },
-    new Uint8Array(pic) //The data you want to hash as an ArrayBuffer
+		{ name: "SHA-256" },
+		new TextEncoder().encode(pic.slice(pic.length - 1000)) //The data you want to hash as an ArrayBuffer
 	)
-	.then(function(hash){
-	    //returns the hash as an ArrayBuffer
-	    console.log(new Uint8Array(hash));
+	.then(hash => {
+		console.log(hex.fromBuffer(hash));
 	})
 	.catch(function(err){
 	    console.error(err);
