@@ -12,10 +12,10 @@ var blockchain = [];                     // Blockchain stores here
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded( {extended: true} ));
 mongoose.Promise = global.Promise;
-mongoose.connect("mongodb://localhost:27017/imageDB");
+mongoose.connect("mongodb://blocc:bloccb@ds135777.mlab.com:35777/imagedb");
 var db = mongoose.connection;
 // Successfully connected
-db.on('connected', function() {console.log('Mongoose default connection open to ' + dbURI);});
+// db.on('connected', function() {console.log('Mongoose default connection open to ' + dbURI);});
 // Connection throws an error
 db.on('error', function(err) {console.log('Mongoose default connection error: ' + err);});
 // Connection disconnected
@@ -45,25 +45,25 @@ app.post('/postBlock', function(req, res) {
   blockchain.append(res);
 });
 
-// POST image to database
-app.post('/postImage', function(req, res) {
-  lastBlockHash = blockchain[-1];
-  // Create new image model with hash and imageFileBinary
-  var newImage = new Image({
-    hashCode: lastBlockHash,
-    imageFileBinary: res.body     // Need to check if body works...
-  });
+// // POST image to database
+// app.post('/postImage', function(req, res) {
+//   lastBlockHash = blockchain[-1];
+//   // Create new image model with hash and imageFileBinary
+//   var newImage = new Image({
+//     hashCode: lastBlockHash,
+//     imageFileBinary: res.body     // Need to check if body works...
+//   });
 
-  // Save model to mongoDB
-  newImage.save()
-    .then(function(product) {
-      console.log("newImage is saved to database!");
-    })
-    .catch(function(err) {
-      console.error(err);
-    });
+//   // Save model to mongoDB
+//   newImage.save()
+//     .then(function(product) {
+//       console.log("newImage is saved to database!");
+//     })
+//     .catch(function(err) {
+//       console.error(err);
+//     });
   
-});
+// });
 // GET hash code
 app.get('/getHashCode', (req, res) => {
   // res.send specific blockchain block
@@ -79,6 +79,46 @@ app.listen(port, () => {
 ///////////// Ignore this for now /////////////
 ///////////// Ignore this for now /////////////
 ///////////// Ignore this for now /////////////
+
+
+
+
+
+
+
+
+
+
+// app.get('/', (req, res) => res.sendFile('index.html', {root: __dirname}))
+
+// POST image to database
+app.get('/', function(req, res) {
+  
+  // Create new image model with hash and imageFileBinary
+  var newImage = new Image({
+    hashCode: "lastBlockHash",
+    imageFileBinary: "res.body"     // Need to check if body works...
+  });
+
+  // Save model to mongoDB
+  newImage.save()
+    .then(function(product) {
+      console.log("newImage is saved to database!");
+    })
+    .catch(function(err) {
+      console.error(err);
+    });
+  
+});
+
+
+
+
+
+
+
+
+
 
 // // Test REST methods
 // app.get('/last_block', (req, res) => res.send("This is the last block."))
