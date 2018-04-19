@@ -1,4 +1,4 @@
-// Libraries
+// >>>>> Libraries <<<<<<
 const path = require('path');            // Writing file path easier
 const express = require('express');      // express server framework
 var bodyParser = require("body-parser"); // JSON parser
@@ -15,35 +15,75 @@ mongoose.Promise = global.Promise;
 mongoose.connect("mongodb://blocc:bloccb@ds135777.mlab.com:35777/imagedb");
 var db = mongoose.connection;
 // Successfully connected
-// db.on('connected', function() {console.log('Mongoose default connection open to ' + dbURI);});
+db.on('connected', function() {console.log('Mongoose default connection open to ' + db.host});
 // Connection throws an error
 db.on('error', function(err) {console.log('Mongoose default connection error: ' + err);});
 // Connection disconnected
 db.on('disconnected', function() {console.log('Mongoose default connection disconnected');});
 // If node process ends, close the Mongoose connection.
-process.on('SIGINT', function() {
+process.on('SIGINT', function() { // INT (interruption) signal
   db.close(function() {
     console.log('Mongoose default connection disconnected through app termination');
-    process.exit(0);
+    process.exit(0); // Node exit the process
   });
 });
 
 // Database (for images) document schema
 var imageSchema = new mongoose.Schema({
-  hashCode: {type: String},
-  imageFileBinary: {type: String}
+  hashCode: {type: String},          // Hash code in String format
+  imageFileBinary: {type: String}    // Image in binary format
 });
 
 // Model initiation with document schemda
-var Image = mongoose.model("Image", imageSchema);
+var Image = mongoose.model("Image", imageSchema);   // Mongoose automatically looks for the plural version of the model name --> "images"
 
 
-// CRUD endpoints
-
-// { hashCode: {type: String}, imageBinaryFile: {type: Float} }
-app.post('/postBlock', function(req, res) {
-  blockchain.append(res);
+// >>>>> CRUD endpoints <<<<<
+// Express listening --> For local hosting --> Take out when hosting on server
+app.listen(port, () => {
+  console.log("Web server listening on localhost:" + port);
 });
+
+// Landing page --> Take out when incorporating with app
+app.get('/', (req, res) => res.sendFile('index.html', {root: __dirname}))
+
+// POST image to database
+app.get('/postToDatabase', function(req, res) {
+  
+ // NOW trying to find a way to parse req so that the code and image feeds into the image creation
+
+
+  // Create new image model with hash and imageFileBinary
+  // var newImage = new Image({
+  //   hashCode: "lastBlockHash",
+  //   imageFileBinary: "res.body"     // Need to check if body works...
+  // });
+
+// Create new image model with hash and imageFileBinary
+  var newImage = new Image({
+    hashCode: req.hashCode,
+    imageFileBinary: req.imageFileBinary     // Need to check if body works...
+  });
+  
+  // Save model to mongoDB
+  newImage.save()
+  .then(function(product) {
+    console.log("newImage is saved to database!");          // debug
+    res.send("SAVED! Yay!!!")
+  })
+  .catch(function(err) {
+    console.error(err);
+    res.send("NOT SAVED! Check console for error message.") // debug
+  });
+  
+});
+
+
+
+// app.post('/postBlock', function(req, res) {
+//   blockchain.append(res);
+// });
+
 
 // // POST image to database
 // app.post('/postImage', function(req, res) {
@@ -65,56 +105,10 @@ app.post('/postBlock', function(req, res) {
   
 // });
 // GET hash code
-app.get('/getHashCode', (req, res) => {
-  // res.send specific blockchain block
-  // blockchain[i]
-});
-
-
-// Listening on port
-app.listen(port, () => {
-  console.log("Web server listening on localhost:" + port);
-});
-
-///////////// Ignore this for now /////////////
-///////////// Ignore this for now /////////////
-///////////// Ignore this for now /////////////
-
-
-
-
-
-
-
-
-
-
-// app.get('/', (req, res) => res.sendFile('index.html', {root: __dirname}))
-
-// POST image to database
-app.get('/', function(req, res) {
-  
-  // Create new image model with hash and imageFileBinary
-  var newImage = new Image({
-    hashCode: "lastBlockHash",
-    imageFileBinary: "res.body"     // Need to check if body works...
-  });
-
-  // Save model to mongoDB
-  newImage.save()
-    .then(function(product) {
-      console.log("newImage is saved to database!");
-    })
-    .catch(function(err) {
-      console.error(err);
-    });
-  
-});
-
-
-
-
-
+// app.get('/getHashCode', (req, res) => {
+//   res.send specific blockchain block
+//   blockchain[i]
+// });
 
 
 
