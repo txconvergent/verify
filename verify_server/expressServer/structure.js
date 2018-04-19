@@ -15,7 +15,7 @@ mongoose.Promise = global.Promise;
 mongoose.connect("mongodb://blocc:bloccb@ds135777.mlab.com:35777/imagedb");
 var db = mongoose.connection;
 // Successfully connected
-db.on('connected', function() {console.log('Mongoose default connection open to ' + db.host});
+// db.on('connected', function() {console.log('Mongoose default connection open to ' + db.host});
 // Connection throws an error
 db.on('error', function(err) {console.log('Mongoose default connection error: ' + err);});
 // Connection disconnected
@@ -48,7 +48,7 @@ app.listen(port, () => {
 app.get('/', (req, res) => res.sendFile('index.html', {root: __dirname}))
 
 // POST image to database
-app.get('/postToDatabase', function(req, res) {
+app.post('/postToDatabase', function(req, res) {
   
  // NOW trying to find a way to parse req so that the code and image feeds into the image creation
 
@@ -61,8 +61,8 @@ app.get('/postToDatabase', function(req, res) {
 
 // Create new image model with hash and imageFileBinary
   var newImage = new Image({
-    hashCode: req.hashCode,
-    imageFileBinary: req.imageFileBinary     // Need to check if body works...
+    hashCode: req.body.hashCode,
+    imageFileBinary: req.body.imageFileBinary     // Need to check if body works...
   });
   
   // Save model to mongoDB
