@@ -9,13 +9,17 @@ var app = express();
 var port = 3000;
 var blockchain = [];                     // Blockchain stores here
 
+// JSON parser for REST
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded( {extended: true} ));
+
+// Mongoose promise for errors
 mongoose.Promise = global.Promise;
-mongoose.connect("mongodb://blocc:bloccb@ds135777.mlab.com:35777/imagedb");
+mongoose.connect("mongodb://blocc:bloccb@ds135777.mlab.com:35777/imagedb");  // Need to figure a way to hide username and pw
 var db = mongoose.connection;
+
 // Successfully connected
-// db.on('connected', function() {console.log('Mongoose default connection open to ' + db.host});
+db.on('connected', function() {console.log('Mongoose default connection open to ' + db.host.toString())});
 // Connection throws an error
 db.on('error', function(err) {console.log('Mongoose default connection error: ' + err);});
 // Connection disconnected
