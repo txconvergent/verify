@@ -51,9 +51,13 @@ app.listen(port, () => {
 // Landing page --> Take out when incorporating with app
 app.get('/', (req, res) => res.sendFile('index.html', {root: __dirname}))
 
+app.get('/photo/*', (req, res) => {
+    res.send('resquested photo')
+})
+
 // POST image to database
 app.post('/postToDatabase', function(req, res) {
-  
+
  // NOW trying to find a way to parse req so that the code and image feeds into the image creation
 
 
@@ -68,7 +72,7 @@ app.post('/postToDatabase', function(req, res) {
     hashCode: req.body.hashCode,
     imageFileBinary: req.body.imageFileBinary     // Need to check if body works...
   });
-  
+
   // Save model to mongoDB
   newImage.save()
   .then(function(product) {
@@ -79,7 +83,7 @@ app.post('/postToDatabase', function(req, res) {
     console.error(err);
     res.send("NOT SAVED! Check console for error message.") // debug
   });
-  
+
 });
 
 
@@ -106,7 +110,7 @@ app.post('/postToDatabase', function(req, res) {
 //     .catch(function(err) {
 //       console.error(err);
 //     });
-  
+
 // });
 // GET hash code
 // app.get('/getHashCode', (req, res) => {
@@ -132,9 +136,9 @@ app.post('/postToDatabase', function(req, res) {
 // function callPythonScript(req, res) {
   //   // using spawn instead of exec, prefer a stream over a buffer
   //   // to avoid maxBuffer issue
-  
+
   //   var spawn = require("child_process").spawn;
-  //   var process = spawn('python', ["./Verify.py", 
+  //   var process = spawn('python', ["./Verify.py",
   //     req.query.one,   // method one
   //     req.query.two,   // method two
 //     req.query.three, // method three
