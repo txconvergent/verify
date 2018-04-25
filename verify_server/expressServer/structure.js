@@ -44,14 +44,9 @@ app.get('/photo/:id', (req, res) => {
 		if (err) console.log(err);
 		else {
             if (result == null) {
-                res.send("<!DOCTYPE html><html><head><title>Image Not Found</title></head><body>" +
-        				"<h1>Image not found!</h1></body></html>")
+                res.render('404')
             } else {
                 res.render('photo', { picture: "data:image/jpeg;base64," + result.imageFileBinary, hash: result.hashCode })
-
-                //res.send("<!DOCTYPE html><html><head><title>Display Image</title></head><body>" +
-                //    "<img style='display:block; width:500px;' id='base64image'" +
-                //    "src='data:image/jpeg;base64," + result.imageFileBinary + "' /></body></html>");
             }
         }
 	});

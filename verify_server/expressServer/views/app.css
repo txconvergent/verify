@@ -19,7 +19,7 @@ img {
 	text-align: center;
 }
 
-p {
+p, h1 {
 	color: #00b100;
 	font-family: monospace;
 }
@@ -27,4 +27,8 @@ p {
 #metadata {
 	padding-top: 10px;
 	text-align: left;
+}
+
+#frown {
+	font-size: 5em;
 }
