@@ -1,0 +1,11 @@
+Hi!
+
+You have reached the server spawned by bloccbuster.
+
+This is the default page.
+
+And we are still in development mode.
+
+Contact the developers at:
+- ckulkarni5@utexas.edu
+- anthonyylee@utexas.edu
