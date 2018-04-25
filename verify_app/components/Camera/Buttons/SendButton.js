@@ -50,6 +50,24 @@ function _hashPic(pic){
 	)
 	.then(hash => {
 		console.log(hex.fromBuffer(hash));
+
+		fetch("http://10.146.70.235:3000/postToDatabase",
+			{
+				method: "post",
+				body: JSON.stringify({
+					hashCode: hex.fromBuffer(hash),
+					imageFileBinary: pic
+				}),
+				headers: {
+			    	"Content-Type": "application/json"
+				},
+				credentials: "same-origin"
+			}
+		).then(function(response) {
+			console.log("success");
+		}, function(error) {
+			console.log("error: " + error);
+		})
 	})
 	.catch(function(err){
 	    console.error(err);
