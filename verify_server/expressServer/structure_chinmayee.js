@@ -57,6 +57,15 @@ app.get('/stopInterval', addBlock() {
   clearInterval(timer);
 });
 
+if timer < 5 min {
+  tempblock.append(block)
+} else if timer >= 5 min {
+  create block from tempblock
+  blockchain.append( created block)
+}
+
+
+
 // POST image to database
 app.post('/postImage', function(req, res) {
   lastBlockHash = blockchain[-1];
