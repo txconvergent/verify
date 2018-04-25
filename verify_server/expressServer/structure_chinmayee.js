@@ -48,7 +48,7 @@ app.post('/postBlock', function(req, res) {
 });
 
 app.get('/startInterval', addBlock() {
-  timer = setInterval(addBlock() {
+  timer = setInterval(addBlock(tempBlock) {
       console.log('Interval is running')
   }, 600000)
 });
