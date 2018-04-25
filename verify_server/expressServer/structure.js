@@ -43,7 +43,6 @@ var Image = mongoose.model("Image", imageSchema);   // Mongoose automatically lo
 
 
 // >>>>> CRUD endpoints <<<<<
-// Express listening --> For local hosting --> Take out when hosting on server
 app.listen(port, () => {
   console.log("Web server listening on localhost:" + port);
 });
