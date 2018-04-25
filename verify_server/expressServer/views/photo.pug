@@ -1,0 +1,18 @@
+html
+	head
+		title="Photo"
+		style
+			include app.css
+		script(src="http://code.jquery.com/jquery-3.3.1.min.js", integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=", crossorigin="anonymous")
+
+	body
+		div(id="container")
+			div(id="pic-holder")
+				img(src=picture)
+
+				div(id="metadata")
+					p user: anonymous
+					p hash: #{hash}
+
+		script
+			include app.js
