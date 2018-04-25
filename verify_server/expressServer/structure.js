@@ -10,7 +10,7 @@ var port = 3000;
 var blockchain = [];                     // Blockchain stores here
 
 // JSON parser for REST
-app.use(bodyParser.json());
+app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded( {extended: true} ));
 
 // Mongoose promise for errors
@@ -34,6 +34,7 @@ process.on('SIGINT', function() { // INT (interruption) signal
 
 // Database (for images) document schema
 var imageSchema = new mongoose.Schema({
+  url: {type: String},
   hashCode: {type: String},          // Hash code in String format
   imageFileBinary: {type: String}    // Image in binary format
 });
@@ -51,13 +52,22 @@ app.listen(port, () => {
 // Landing page --> Take out when incorporating with app
 app.get('/', (req, res) => res.sendFile('index.html', {root: __dirname}))
 
-app.get('/photo/*', (req, res) => {
-    res.send('resquested photo')
+app.get('/photo/:id', (req, res) => {
+    var id = req.params.id;
+
+    Image.findOne({ 'url':id }, function(err, result) {
+        if (err) console.log(err);
+        else {
+            res.send("<!DOCTYPE html><html><head><title>Display Image</title></head><body>" +
+                "<img style='display:block; width:500px;' id='base64image'" +
+                "src='data:image/jpeg;base64," + result.imageFileBinary + "' /></body></html>");
+        }
+    });
 })
 
 // POST image to database
 app.post('/postToDatabase', function(req, res) {
-
+console.log("got request");
  // NOW trying to find a way to parse req so that the code and image feeds into the image creation
 
 
@@ -69,6 +79,7 @@ app.post('/postToDatabase', function(req, res) {
 
 // Create new image model with hash and imageFileBinary
   var newImage = new Image({
+    url: req.body.hashCode.slice(0, 5),
     hashCode: req.body.hashCode,
     imageFileBinary: req.body.imageFileBinary     // Need to check if body works...
   });
