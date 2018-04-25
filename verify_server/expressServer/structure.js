@@ -42,7 +42,6 @@ var Image = mongoose.model("Image", imageSchema);
 // >>>>> CRUD endpoints <<<<<
 app.listen(port, () => {
   console.log("Web server listening on localhost:" + port);
-
 });
 
 // POST image to database
